@@ -1,0 +1,30 @@
+@import "../../const/variants.scss";
+
+.header-container {
+  width: 100%;
+  height: 5vh;
+  max-height: 5vh;
+  background-color: $resultButton;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    list-style-type: none;
+    a {
+      text-decoration: none;
+      color: $white;
+      transition: all 0.2s;
+      &:hover {
+        font-size: 1.2em;
+        font-weight: 600;
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+@import "../../const/variants.scss";
+
+.main-container {
+  width: 100%;
+  height: 65vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $primary;
+  align-items: center;
+  button {
+    font-size: 14px;
+    margin: 5px;
+    padding: 10px;
+    border: 2px;
+    border-radius: 10px;
+    border-color: $black;
+  }
+}
+
+.instructions-container {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $primary;
+
+  .card {
+    top: 10px;
+    background-color: $secundary;
+    border: 1px solid $black;
+    height: 75%;
+    width: 60%;
+  }
+  h3 {
+    text-align: center;
+  }
+}
+
+.form-group {
+  width: 60%;
+  padding: 20px;
+  text-align: center;
+  background-color: $secundary;
+  border: 1px solid $black;
+  border-radius: 5px;
+  button {
+    margin-top: 5px;
+    width: 20vh;
+    color: $white;
+  }
+  .addButton {
+    background-color: $addButton;
+  }
+  .deleteButton {
+    background-color: $deleteButton;
+  }
+  .resultButton {
+    background-color: $resultButton;
+  }
+}
+
+.form-item {
+  input {
+    padding: 7px;
+    margin: 15px;
+    border: 1px solid $black;
+    border-radius: 10px;
+  }
+}
