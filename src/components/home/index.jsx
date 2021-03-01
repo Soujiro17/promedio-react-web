@@ -1,7 +1,7 @@
 import './index.scss';
 import { React, useState, useEffect, useRef } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Field, Header } from '../';
+import { Field, Header, Footer } from '../';
 
 function Home() {
 
@@ -52,19 +52,22 @@ function Home() {
   }
 
   const deleteAllFields = () =>{
-    setArrayNotas([])
-    setArrayPercentages([])
-    setInputNota([])
-    setCount(1);
-    setPromedio(0);
+    setTimeout(() => {
+      setArrayNotas([])
+      setArrayPercentages([])
+      setInputNota([])
+      setCount(1);
+      setPromedio(0);
+    }, 50)
+
   }
 
   
   return (
     <>
-      <Header></Header>
+      <Header/>
       <div className="instructions-container">
-        <div className="card">
+        <div className="card-container">
           <div className="card-body">
             <h3 className="card-title">Modo de uso</h3>
             <ul>
@@ -78,16 +81,18 @@ function Home() {
       </div>
       <div className = "main-container">
         <div className = "form-group">
+          <h3>Notas</h3>
           <div className = "form-item">{inputNota}</div>
           <button className = "addButton" onClick = {addField}>Agregar nota</button>
           {count === 1? addField() : ""}
           {inputNota.length > 1? <button className = "deleteButton" onClick = {deleteInput}>Borrar nota</button> : ""}
-          {count > 3? <button className = "deleteAllButton" onClick = {deleteAllFields}>Borrar todas las notas</button>:""}
+          {count > 3? <button className = "delAllButton" onClick = {deleteAllFields}>Borrar todas las notas</button>:""}
           <br/>
           <button className = "resultButton" onClick = {calcularPromedio}>Calcular promedio</button>
           <h1>{promedio === 0? "" : `Promedio: ${promedio}`}</h1>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }
