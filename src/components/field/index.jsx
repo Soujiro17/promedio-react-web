@@ -40,10 +40,11 @@ export default function Field(props) {
 
     return (
         <div>
-            Nota {count}:
+            <span className = "nota-percentage">Nota {count}:</span>
             <input type = "text" name = "nota" maxLength = "2" onChange = {(e) => addNota(e.target.value)} placeholder = "ej: 45"/>
-            Porcentaje {count}:
+            <span className = "nota-percentage">Porcentaje {count}:</span>
             <input type = "text" name = "percentage" maxLength = "2" onChange = {(e) => addPercentage(e.target.value)} placeholder = "ej: 20"/>%
+            <hr></hr>
         </div>
     )
 }
