@@ -9,7 +9,6 @@ export default function Field(props) {
     const addNota = (nota) => {
         let result = false
         nota = nota.toLowerCase()
-        console.log(nota)
         alphabet.map(element => {
             if(nota.includes(element)){
                 result = true
@@ -40,11 +39,11 @@ export default function Field(props) {
 
     return (
         <div>
+            <hr></hr>
             <span className = "nota-percentage">Nota {count}:</span>
             <input type = "text" name = "nota" maxLength = "2" onChange = {(e) => addNota(e.target.value)} placeholder = "ej: 45"/>
             <span className = "nota-percentage">Porcentaje {count}:</span>
             <input type = "text" name = "percentage" maxLength = "2" onChange = {(e) => addPercentage(e.target.value)} placeholder = "ej: 20"/>%
-            <hr></hr>
         </div>
     )
 }

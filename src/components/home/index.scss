@@ -49,11 +49,13 @@
 .form-group {
   width: 40%;
   padding-top: 10px;
+  position: absolute;
   text-align: center;
   border: 1px solid $white;
   color: $white;
   border-radius: 5px;
   padding-bottom: 40px;
+  margin-bottom: 10px;
   button {
     margin-top: 5px;
     width: 20vh;
@@ -81,6 +83,23 @@
     display: flex;
     justify-content: center;
     margin-left: 100px;
+  }
+  .examen-form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    button {
+      width: 43px;
+      border-radius: 50px;
+      color: $white;
+    }
+
+    #si-examen {
+      margin-right: 50px;
+      background-color: $deleteButton;
+    }
+    #no-examen {
+      background-color: $addButton;
+    }
   }
 }
 
