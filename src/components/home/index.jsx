@@ -72,7 +72,7 @@ function Home() {
             <h3 className="card-title">Modo de uso</h3>
             <ul>
               <li><p className="card-text">El modo de uso es sencillo: en los espacios en blanco debes poner tus notas y el porcentaje respectivo a cada una. Ejemplo: 45 (equivalente a un 4,5) y 20 (equivalente al 20% del promedio).</p></li>
-              <li><p className="card-text">Para los porcentajes se deben ingresar números enteros. Por ejemplo: 20 (equivale a un 20% del promedio).</p></li>
+              <li><p className="card-text">Para las notas y porcentajes se deben ingresar números enteros. Por ejemplo: 20 (equivale a un 20% del promedio).</p></li>
               <li><p className="card-text">NO se deben dejar espacios en blanco. Todas las notas deben ser ingresadas con números, en caso de ingresar texto, lanzará error.</p></li>
               <li><p className="card-text">La suma de los porcentajes de las notas debe ser 100%. En caso contrario, lanzará error.</p></li>
             </ul>
@@ -89,7 +89,7 @@ function Home() {
           {count > 3? <button className = "delAllButton" onClick = {deleteAllFields}>Borrar todas las notas</button>:""}
           <br/>
           <button className = "resultButton" onClick = {calcularPromedio}>Calcular promedio</button>
-          <h1>{promedio === 0? "" : `Promedio: ${promedio}`}</h1>
+          <h1>{promedio === 0? "" : promedio >= 39.5? <span className = "addButton">Promedio: {promedio}</span> : <span className = "deleteButton">Promedio: {promedio}</span>}</h1>
         </div>
       </div>
       <Footer/>
