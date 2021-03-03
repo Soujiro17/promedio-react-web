@@ -1,6 +1,7 @@
 import React from 'react'
 import './index.scss'
 import { Link } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Header() {
     return (
@@ -8,7 +9,6 @@ export default function Header() {
                 <ul>
                     <Link to = "/"><li>Calculadora de promedios</li></Link>
                     <Link to = "/tabla-frecuencia"><li>Tabla de frecuencia</li></Link>
-                    <Link to = "/contact"><li>Contacto</li></Link>
                 </ul>
         </header>
 

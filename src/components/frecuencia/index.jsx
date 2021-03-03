@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Header, StickyHeadTable, TablaOrdenada } from '../';
 import './index.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Frecuencia() {
     const [datos, setDatos] = useState("");
@@ -15,10 +16,10 @@ export default function Frecuencia() {
                     <div className="card-body">
                         <h3 className="card-title">Modo de uso</h3>
                         <ul>
-                        <li><p className="card-text">El modo de uso es sencillo: en los espacios en blanco debes poner tus notas y el porcentaje respectivo a cada una. Ejemplo: 45 (equivalente a un 4,5) y 20 (equivalente al 20% del promedio).</p></li>
-                        <li><p className="card-text">Para las notas y porcentajes se deben ingresar números enteros. Por ejemplo: 20 (equivale a un 20% del promedio).</p></li>
-                        <li><p className="card-text">NO se deben dejar espacios en blanco. Todas las notas deben ser ingresadas con números, en caso de ingresar texto, lanzará error.</p></li>
-                        <li><p className="card-text">La suma de los porcentajes de las notas debe ser 100%. En caso contrario, lanzará error.</p></li>
+                        <li><p className="card-text">Para utilizar la tabla se deben ingresar todos los datos separados por comas SIN espacios. Ejemplo: 1,2,15,2,)</p></li>
+                        <li><p className="card-text">El cambio de tipo de tabla con los datos ingresados NO hará que estos desaparezcan, la tabla realizará los cálculos igualmente.</p></li>
+                        <li><p className="card-text">En caso ingresar letras o separar los números sin coma (",") la tabla no devolverá resultados.</p></li>
+                        <li><p className="card-text">Si debe ingresar datos con coma, reemplace esta por un punto. Ejemplo: 16.2,22.0,7</p></li>
                         </ul>
                     </div>
                     </div>

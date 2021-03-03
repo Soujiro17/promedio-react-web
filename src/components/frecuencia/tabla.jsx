@@ -47,9 +47,11 @@ const crearFilas = (frecuenciaA, frecuenciaB) =>{
         if(property !== "Total"){
             countFrecuenciaA += frecuenciaA[property];
             countFrecuenciaB += frecuenciaB[property];
+            array.push(createData(property, frecuenciaA[property], countFrecuenciaA, Math.round(frecuenciaB[property] * 100) / 100, Math.round(countFrecuenciaB * 100) / 100, Math.round(frecuenciaB[property] * 100) + "%", Math.round(countFrecuenciaB * 100) + "%"))
         }
-        array.push(createData(property, frecuenciaA[property], countFrecuenciaA, Math.round(frecuenciaB[property] * 100) / 100, Math.round(countFrecuenciaB * 100) / 100, parseInt(frecuenciaB[property] * 100) + "%", parseInt(countFrecuenciaB * 100) + "%"))
     }
+    array.push(createData("Total", frecuenciaA["Total"], countFrecuenciaA, Math.round(frecuenciaB["Total"] * 100) / 100, Math.round(countFrecuenciaB * 100) / 100, Math.round(frecuenciaB["Total"] * 100) + "%", Math.round(countFrecuenciaB * 100) + "%"))
+    
     return array;
 }
 

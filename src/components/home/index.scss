@@ -60,6 +60,11 @@
     margin-top: 5px;
     width: 20vh;
     color: $white;
+    transition: all 0.2s;
+    &:hover {
+      font-size: 1em;
+      font-weight: 500;
+    }
   }
   .addButton {
     background-color: $addButton;

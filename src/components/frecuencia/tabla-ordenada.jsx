@@ -10,7 +10,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
 const columns = [
-    { id: 'rango', label: 'l/m²', maxWidth: 20 },
+    { id: 'rango', label: 'Rango', maxWidth: 20 },
     { id: 'marcaClase', label: 'Marca de clase (cᵢ)', maxWidth: 20 },
     { id: 'frecuenciaAbsoluta', label: 'Frecuencia absoluta (nᵢ)', maxWidth: 20 },
     { id: 'frecuenciaAbsolutaAcumulada', label: 'Frecuencia absoluta acumulada (Nᵢ)', maxWidth: 20 },
@@ -24,12 +24,24 @@ function createData(rango, marcaClase, frecuenciaAbsoluta, frecuenciaAbsolutaAcu
     return { rango, marcaClase, frecuenciaAbsoluta, frecuenciaAbsolutaAcumulada, frecuenciaRelativa, frecuenciaRelativaAcumulada, frecuenciaRelativaPercentage, frecuenciaRelativaAcumuladaPercentage };
 }
 
-const calcularFrecuenciaA = (data, inicial, final) =>{
-    let count = {};
-    data.forEach(number => {
-        count[number] = (count[number] || 0) + 1;
-        count["Total"] = (count["Total"] || 0) + 1;
-    });
+const calcularFrecuenciaA = (data, amplitudClase) =>{
+    let count = {}, rango = 0, resto = amplitudClase, contador = 0;;
+
+    for(let x = 0; x<data.length; x++){
+        for(let i = 0; i<data.length; i++){
+            if(parseFloat(data[i]) >= rango && parseFloat(data[i])<resto){
+                count[`${rango},${resto}`] = (count[`${rango},${resto}`] || 0) + 1;
+                contador++;
+                if(contador == data.length){
+                    count["Total"] = contador;
+                    return count;
+                }
+            }
+        }
+        rango = resto;
+        resto += amplitudClase;
+        
+    }
     return count;
 }
 
@@ -50,10 +62,13 @@ const crearFilas = (frecuenciaA, frecuenciaB, amplitudClase, rangoFinal) =>{
             countFrecuenciaA += frecuenciaA[property];
             countFrecuenciaB += frecuenciaB[property];
         }
+        if(property === "Total"){
+            array.push(createData(property, "", frecuenciaA[property], "", Math.round(frecuenciaB[property] * 100) / 100, Math.round(countFrecuenciaB * 100) / 100, Math.round(frecuenciaB[property] * 100) + "%", Math.round(countFrecuenciaB * 100) + "%"))
+        }
         if(resto === rangoFinal){
             break
         }
-        array.push(createData(`[${resto},${resto + 4})`, marcaClase, frecuenciaA[property], countFrecuenciaA, Math.round(frecuenciaB[property] * 100) / 100, Math.round(countFrecuenciaB * 100) / 100, parseInt(frecuenciaB[property] * 100) + "%", parseInt(countFrecuenciaB * 100) + "%"))
+        array.push(createData(`[${resto},${resto + 4})`, marcaClase, frecuenciaA[property], countFrecuenciaA, Math.round(frecuenciaB[property] * 100) / 100, Math.round(countFrecuenciaB * 100) / 100, Math.round(frecuenciaB[property] * 100) + "%", Math.round(countFrecuenciaB * 100) + "%"))
         resto+=amplitudClase;
 
     }
@@ -81,7 +96,8 @@ export default function TablaOrdenada(props) {
     const amplitudClase = Math.ceil(rango/numeroClases);
     const rangoFinal = amplitudClase * numeroClases;
     
-    const frecuenciaA = calcularFrecuenciaA(arraySorted);
+    const frecuenciaA = calcularFrecuenciaA(arraySorted, amplitudClase);
+    console.log(frecuenciaA)
     const frecuenciaR = calcularFrecuenciaR(frecuenciaA);
     const rows = crearFilas(frecuenciaA, frecuenciaR, amplitudClase, rangoFinal);
 
