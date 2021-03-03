@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Header, StickyHeadTable } from '../';
+import { Header, StickyHeadTable, TablaOrdenada } from '../';
 import './index.scss';
 
 export default function Frecuencia() {
     const [datos, setDatos] = useState("");
+    const [ordenada, setOrdenada] = useState(false);
 
     return (
         <div>
@@ -22,9 +23,14 @@ export default function Frecuencia() {
                     </div>
                     </div>
                 </div>
+                <div className = "datos-agrupados">
+                    <h3>Datos agrupados?</h3>
+                    <button id="si-datos" onClick = {() => setOrdenada(true)}><span className = "datos-text">Si</span></button>
+                    <button id="no-datos" onClick = {() => setOrdenada(false)}><span className = "datos-text">No</span></button>
+                </div>
                 <div className="table-information">
                     <input className = "table-input" onChange = {(e) => setDatos(e.target.value)}></input>
-                    <StickyHeadTable data = {datos} key = {Math.random()}></StickyHeadTable>
+                    {ordenada? <TablaOrdenada data = {datos} key = {Math.random()}/> : <StickyHeadTable data = {datos} key = {Math.random()}/>}
                 </div>
             </main>
         </div>

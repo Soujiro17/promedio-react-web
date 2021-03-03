@@ -10,7 +10,8 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
 const columns = [
-    { id: 'Xi', label: 'Xᵢ', maxWidth: 20 },
+    { id: 'rango', label: 'l/m²', maxWidth: 20 },
+    { id: 'marcaClase', label: 'Marca de clase (cᵢ)', maxWidth: 20 },
     { id: 'frecuenciaAbsoluta', label: 'Frecuencia absoluta (nᵢ)', maxWidth: 20 },
     { id: 'frecuenciaAbsolutaAcumulada', label: 'Frecuencia absoluta acumulada (Nᵢ)', maxWidth: 20 },
     { id: 'frecuenciaRelativa', label: 'Frecuencia relativa (fᵢ = nᵢ / N)', maxWidth: 20 },
@@ -19,11 +20,11 @@ const columns = [
     { id: 'frecuenciaRelativaAcumuladaPercentage', label: 'Frecuencia relativa acumulada (Fᵢ = Nᵢ / N) en %', maxWidth: 20 },
 ];
 
-function createData(Xi, frecuenciaAbsoluta, frecuenciaAbsolutaAcumulada, frecuenciaRelativa, frecuenciaRelativaAcumulada, frecuenciaRelativaPercentage, frecuenciaRelativaAcumuladaPercentage) {
-    return { Xi, frecuenciaAbsoluta, frecuenciaAbsolutaAcumulada, frecuenciaRelativa, frecuenciaRelativaAcumulada, frecuenciaRelativaPercentage, frecuenciaRelativaAcumuladaPercentage };
+function createData(rango, marcaClase, frecuenciaAbsoluta, frecuenciaAbsolutaAcumulada, frecuenciaRelativa, frecuenciaRelativaAcumulada, frecuenciaRelativaPercentage, frecuenciaRelativaAcumuladaPercentage) {
+    return { rango, marcaClase, frecuenciaAbsoluta, frecuenciaAbsolutaAcumulada, frecuenciaRelativa, frecuenciaRelativaAcumulada, frecuenciaRelativaPercentage, frecuenciaRelativaAcumuladaPercentage };
 }
 
-const calcularFrecuenciaA = (data) =>{
+const calcularFrecuenciaA = (data, inicial, final) =>{
     let count = {};
     data.forEach(number => {
         count[number] = (count[number] || 0) + 1;
@@ -40,17 +41,27 @@ const calcularFrecuenciaR = (frecuencia) =>{
     return count;
 }
 
-const crearFilas = (frecuenciaA, frecuenciaB) =>{
-    let countFrecuenciaA = 0, countFrecuenciaB = 0;
+const crearFilas = (frecuenciaA, frecuenciaB, amplitudClase, rangoFinal) =>{
+    let countFrecuenciaA = 0, countFrecuenciaB = 0, marcaClase = 0, resto = 0;
     let array = [];
     for (let property in frecuenciaA) {
+        marcaClase = buscarMedio(resto, resto + amplitudClase);
         if(property !== "Total"){
             countFrecuenciaA += frecuenciaA[property];
             countFrecuenciaB += frecuenciaB[property];
         }
-        array.push(createData(property, frecuenciaA[property], countFrecuenciaA, Math.round(frecuenciaB[property] * 100) / 100, Math.round(countFrecuenciaB * 100) / 100, parseInt(frecuenciaB[property] * 100) + "%", parseInt(countFrecuenciaB * 100) + "%"))
+        if(resto === rangoFinal){
+            break
+        }
+        array.push(createData(`[${resto},${resto + 4})`, marcaClase, frecuenciaA[property], countFrecuenciaA, Math.round(frecuenciaB[property] * 100) / 100, Math.round(countFrecuenciaB * 100) / 100, parseInt(frecuenciaB[property] * 100) + "%", parseInt(countFrecuenciaB * 100) + "%"))
+        resto+=amplitudClase;
+
     }
     return array;
+}
+
+const buscarMedio = (marca, amplitud) =>{
+    return (marca + amplitud)/2;
 }
 
 const useStyles = makeStyles({
@@ -61,10 +72,18 @@ const useStyles = makeStyles({
     },
 });
 
-export default function StickyHeadTable(props) {
-    const frecuenciaA = calcularFrecuenciaA(props.data.split(","));
+export default function TablaOrdenada(props) { 
+    const arraySorted = props.data.split(",").sort(function(a, b) {
+        return a - b;
+    });
+    const rango = arraySorted[arraySorted.length-1] - arraySorted[0];
+    const numeroClases = Math.round(1 + 3.322 * Math.log10(arraySorted.length));
+    const amplitudClase = Math.ceil(rango/numeroClases);
+    const rangoFinal = amplitudClase * numeroClases;
+    
+    const frecuenciaA = calcularFrecuenciaA(arraySorted);
     const frecuenciaR = calcularFrecuenciaR(frecuenciaA);
-    const rows = crearFilas(frecuenciaA, frecuenciaR);
+    const rows = crearFilas(frecuenciaA, frecuenciaR, amplitudClase, rangoFinal);
 
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
