@@ -6,8 +6,8 @@ export default function Header() {
     return (
         <header className = "header-container">
                 <ul>
-                    <Link to = "/"><li>Inicio</li></Link>
-                    <Link to = "/about-us"><li>Sobre nosotros</li></Link>
+                    <Link to = "/"><li>Calculadora de promedios</li></Link>
+                    <Link to = "/tabla-frecuencia"><li>Tabla de frecuencia</li></Link>
                     <Link to = "/contact"><li>Contacto</li></Link>
                 </ul>
         </header>
