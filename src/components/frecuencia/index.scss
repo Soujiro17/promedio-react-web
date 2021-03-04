@@ -2,61 +2,63 @@
 
 .table-container {
   width: 100%;
-  height: 100vh;
-  display: block;
+  height: 94.7vh;
+}
+.table-information {
+  border: 1px solid $white;
+  border-radius: 10px;
+  padding: 10px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  .table-information {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 150px;
-    margin-left: 450px;
-    input {
-      width: 100%;
-      height: 100px;
-      margin: 10px;
-      border: 1px solid $black;
-      border-radius: 10px;
+  margin: auto;
+  input {
+    width: 100%;
+    height: 100px;
+    margin: 10px;
+    border: 1px solid $black;
+    border-radius: 10px;
+  }
+}
+
+.datos-agrupados {
+  margin: auto;
+  text-align: center;
+  color: $white;
+  button {
+    width: 50px;
+    height: 50px;
+    border: 1px solid $black;
+    border-radius: 30px;
+    color: $white;
+    transition: all 0.2s;
+    &:hover {
+      font-size: 1.2em;
+      font-weight: 500;
     }
   }
-  .datos-agrupados {
-    width: 100%;
-    padding-top: 10px;
-    position: absolute;
-    text-align: center;
+  h3 {
     color: $white;
-    border-radius: 5px;
-    button {
-      width: 50px;
-      height: 50px;
-      border: 1px solid $black;
-      border-radius: 30px;
-      color: $white;
-      transition: all 0.2s;
-      &:hover {
-        font-size: 1.2em;
-        font-weight: 500;
-      }
-    }
-    h3 {
-      color: $white;
-    }
+  }
+  hr {
+    background-color: $white;
+  }
 
-    #si-datos {
-      margin-right: 50px;
-      background-color: $deleteButton;
-    }
-    #no-datos {
-      background-color: $addButton;
-    }
+  #si-datos {
+    margin-right: 50px;
+    background-color: $deleteButton;
+  }
+  #no-datos {
+    background-color: $addButton;
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .table-container {
-    .table-information {
-    }
+  .table-information {
+    width: 98%;
+  }
+  .tabla {
+    max-width: 100%;
   }
 }

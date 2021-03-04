@@ -28,3 +28,21 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .header-container {
+    text-align: center;
+    font-size: 12px;
+    justify-content: center !important;
+    li {
+      width: 100px;
+      text-align: center;
+    }
+    a {
+      text-align: center;
+      text-decoration: none;
+      color: $white;
+      transition: all 0.2s;
+    }
+  }
+}

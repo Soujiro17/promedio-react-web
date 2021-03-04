@@ -7,8 +7,8 @@ export default function Header() {
     return (
         <header className = "header-container">
                 <ul>
-                    <Link to = "/"><li>Calculadora de promedios</li></Link>
-                    <Link to = "/tabla-frecuencia"><li>Tabla de frecuencia</li></Link>
+                    <li><Link to = "/">Calculadora de promedios</Link></li>
+                    <li><Link to = "/tabla-frecuencia">Tabla de frecuencia</Link></li>
                 </ul>
         </header>
 
