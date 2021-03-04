@@ -31,11 +31,7 @@ app.get('/', function (req, res) {
     if (err) {
       return console.log(err);
     }
-
-    data = data
-      .replace(/__TITLE__/g, "Calcula mi promedio")
-      .replace(/__DESCRIPTION__/g, "Calcula tu promedio de forma fácil y sencilla! También contamos con tablas de frecuencia con datos ordenados y no.");
-
+    
     res.send(data)
   });
 });
