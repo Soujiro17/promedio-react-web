@@ -97,7 +97,6 @@ export default function TablaOrdenada(props) {
     const rangoFinal = amplitudClase * numeroClases;
     
     const frecuenciaA = calcularFrecuenciaA(arraySorted, amplitudClase);
-    console.log(frecuenciaA)
     const frecuenciaR = calcularFrecuenciaR(frecuenciaA);
     const rows = crearFilas(frecuenciaA, frecuenciaR, amplitudClase, rangoFinal);
 
