@@ -1,35 +1,30 @@
-const express = require('express');
 const favicon = require('express-favicon');
-const path = require('path');
-const fs = require('fs')
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
 
-const port = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 const app = express();
+
 app.use(favicon(__dirname + '/build/libro-logo.ico'));
-//the __dirname is the current directory from where the script is running
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, 'build')));
 
-app.get('/*', function (req, res) {
+app.get("/", (req, res) => {
   const filePath = path.resolve(__dirname, "./build", "index.html");
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
-      return console.log(`err: ${err}`);
+      return console.log(err);
     }
-
+    
+    data = data
+    .replace(/__TITLE__/g, "Calcula mi promedio")
+    .replace(/__DESCRIPTION__/g, "Calcula tu promedio de forma fácil y sencilla! También contamos con tablas de frecuencia con datos ordenados y no.");
+    
     res.send(data)
   });
 });
 
-app.get('/', function (req, res) {
-  const filePath = path.resolve(__dirname, "./build", "index.html");
-  fs.readFile(filePath, "utf8", (err, data) => {
-    if (err) {
-      return console.log(`err: ${err}`);
-    }
+app.use(express.static(path.resolve(__dirname, "./build")));
 
-    res.send(data)
-  });
-});
-
-app.listen(port);
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+})
