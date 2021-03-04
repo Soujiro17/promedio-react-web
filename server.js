@@ -14,7 +14,7 @@ app.get('/*', function (req, res) {
   const filePath = path.resolve(__dirname, "./build", "index.html");
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
-      return console.log(err);
+      return console.log(`err: ${err}`);
     }
 
     res.send(data)
@@ -25,7 +25,7 @@ app.get('/', function (req, res) {
   const filePath = path.resolve(__dirname, "./build", "index.html");
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
-      return console.log(err);
+      return console.log(`err: ${err}`);
     }
 
     res.send(data)
