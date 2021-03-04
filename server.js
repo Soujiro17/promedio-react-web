@@ -11,15 +11,30 @@ app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/*', function (req, res) {
-  const filePath = path.resolve(__dirname, "./build", "index.html");;
+  const filePath = path.resolve(__dirname, "./build", "index.html");
   fs.readFile(filePath, "utf8", (err, data) => {
     if (err) {
       return console.log(err);
     }
 
     data = data
-      .replace(/__TITLE__/g, "Home Page")
-      .replace(/__DESCRIPTION__/g, "Home page description.");
+      .replace(/__TITLE__/g, "Calcula mi promedio")
+      .replace(/__DESCRIPTION__/g, "Calcula tu promedio de forma fácil y sencilla! También contamos con tablas de frecuencia con datos ordenados y no.");
+
+    res.send(data)
+  });
+});
+
+app.get('/', function (req, res) {
+  const filePath = path.resolve(__dirname, "./build", "index.html");
+  fs.readFile(filePath, "utf8", (err, data) => {
+    if (err) {
+      return console.log(err);
+    }
+
+    data = data
+      .replace(/__TITLE__/g, "Calcula mi promedio")
+      .replace(/__DESCRIPTION__/g, "Calcula tu promedio de forma fácil y sencilla! También contamos con tablas de frecuencia con datos ordenados y no.");
 
     res.send(data)
   });
