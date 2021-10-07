@@ -1,3 +1,11 @@
+# Introducción
+
+La página de promedios y tablas de frecuencia fue mi primer proyecto trabajando con ReactJS.
+
+# Link de prueba
+
+<https://promedio-reactjs.herokuapp.com/>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
